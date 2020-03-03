@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 
 export default function SplashScreen() {
   return (
@@ -8,11 +9,22 @@ export default function SplashScreen() {
         style={styles.photo}
         source={require("../assets/img/photo-carrot-yuka.png")}
       />
-      <Text style={styles.welcome}>Bienvenue sur Yuka!</Text>
+      <Text style={styles.welcome}>Welcome !</Text>
       <Text style={styles.description}>
-        Yuka est une appli 100% indépendante qui vous aide à choisir les bons
-        produits !
+        Yuka is a 100% independent app that helps you choose the right products!
       </Text>
+      <View
+        style={{
+          flex: 1
+        }}
+      >
+        <TouchableHighlight
+          style={styles.button}
+          onPress={() => console.log("!")}
+        >
+          <Text style={styles.buttonText}>Let's go !</Text>
+        </TouchableHighlight>
+      </View>
     </View>
   );
 }
@@ -42,5 +54,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontWeight: "200"
+  },
+  button: {
+    height: 44,
+    width: 210,
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 15
+  },
+  buttonText: {
+    color: "#FF790E",
+    fontWeight: "bold",
+    textAlign: "center"
   }
 });
