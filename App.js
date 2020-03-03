@@ -75,7 +75,8 @@ export default function App() {
                           options={{
                             title: "Products",
                             headerStyle: { backgroundColor: "#FFFFFF" },
-                            headerTitleStyle: { color: "#000000" }
+                            headerTitleStyle: { color: "#000000" },
+                            headerTitleAlign: "center"
                           }}
                         >
                           {() => <ProductsScreen />}
@@ -112,6 +113,7 @@ export default function App() {
                           name="Camera"
                           options={{
                             title: "Scan",
+                            headerTitleAlign: "center",
                             headerStyle: { backgroundColor: "#FFFFFF" }
                           }}
                         >
@@ -125,7 +127,7 @@ export default function App() {
                     options={{
                       tabBarLabel: "Favorites",
                       tabBarIcon: ({ color, size }) => (
-                        <AntDesign name={"heart"} size={30} color={"#000000"} />
+                        <AntDesign name={"heart"} size={25} color={"#000000"} />
                       )
                     }}
                   >

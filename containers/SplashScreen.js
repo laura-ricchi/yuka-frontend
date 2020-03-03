@@ -15,7 +15,9 @@ export default function SplashScreen() {
       </Text>
       <View
         style={{
-          flex: 1
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: 20
         }}
       >
         <TouchableHighlight
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     height: 44,
     width: 210,
     justifyContent: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#F9F9F9",
     borderRadius: 15
   },
   buttonText: {
