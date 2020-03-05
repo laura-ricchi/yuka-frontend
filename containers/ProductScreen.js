@@ -9,7 +9,9 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useRoute } from "@react-navigation/core";
-import { Entypo } from "@expo/vector-icons";
+// import ProductCard from "../components/ProductCard";
+import NutriscoreGradeCard from "../components/NutriscoreGradeCard";
+import NoteNutriscoreGrade from "../components/NoteNutriscoreGrade";
 
 const ProductScreen = () => {
   const { params } = useRoute();
@@ -51,22 +53,12 @@ const ProductScreen = () => {
         <View style={{ flex: 1, marginTop: 15 }}>
           <Text style={styles.productName}>{data.product.product_name} </Text>
           <Text style={styles.productBrand}>{data.product.brands} </Text>
-        </View>
-      </View>
-
-      <View>
-        <Entypo name="feather" size={32} color="green" />
-
-        <Text>
-          {data.product.labels === "Bio"
-            ? "Bio"
-            : data.product.labels === "Produit naturel"
-            ? true
-            : false}
-        </Text>
-        <View>
-          <Text>Protéines</Text>
-          <Text></Text>
+          <View style={{ flexDirection: "row" }}>
+            <NutriscoreGradeCard nutriscore={data.product.nutriscore_grade} />
+            <View style={{ marginTop: 15 }}>
+              <NoteNutriscoreGrade note={data.product.nutriscore_grade} />
+            </View>
+          </View>
         </View>
       </View>
     </SafeAreaView>
