@@ -29,7 +29,6 @@ const NoteNutriscoreGrade = ({ note }) => {
       tab.push(
         <View>
           <Text style={styles.note}>40/100</Text>
-
           <Text style={styles.textNote}>Médiocre</Text>
         </View>
       );
@@ -51,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   textNote: {
-    color: "#CBCBCC",
+    color: "#ABAAAB",
     fontSize: 15
   }
 });

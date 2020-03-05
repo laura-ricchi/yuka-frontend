@@ -10,11 +10,11 @@ const NutriscoreGradeCard = ({ nutriscore }) => {
     } else if (nutriscore === "b") {
       tab.push(<Entypo name={"dot-single"} size={60} color="#2ECC71" />);
     } else if (nutriscore === "c") {
-      tab.push(<Entypo name={"dot-single"} size={60} color="#E57D23" />);
+      tab.push(<Entypo name={"dot-single"} size={60} color="#FFCD20" />);
     } else if (nutriscore === "d") {
-      tab.push(<Entypo name={"dot-single"} size={60} color="#DE2E1C" />);
+      tab.push(<Entypo name={"dot-single"} size={60} color="#F57D1E" />);
     } else if (nutriscore === "e") {
-      tab.push(<Entypo name={"dot-single"} size={60} color="#010101" />);
+      tab.push(<Entypo name={"dot-single"} size={60} color="#EF3923" />);
     }
 
     return tab;

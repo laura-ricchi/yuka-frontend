@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
+  Card,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -9,9 +10,12 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useRoute } from "@react-navigation/core";
-// import ProductCard from "../components/ProductCard";
 import NutriscoreGradeCard from "../components/NutriscoreGradeCard";
 import NoteNutriscoreGrade from "../components/NoteNutriscoreGrade";
+import BioProductCard from "../components/BioProductCard";
+import QualityCard from "../components/QualityCard";
+import DefaultCard from "../components/DefaultCard";
+import MeasureProduct from "../components/MeasureProduct";
 
 const ProductScreen = () => {
   const { params } = useRoute();
@@ -61,6 +65,14 @@ const ProductScreen = () => {
           </View>
         </View>
       </View>
+      <View>
+        <View style={styles.measure}>
+          <MeasureProduct measure={data.product.nutrition_data_per} />
+        </View>
+        <View>
+          <BioProductCard bioProduct={data.product.labels} />
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -68,8 +80,8 @@ const ProductScreen = () => {
 const styles = StyleSheet.create({
   image: {
     margin: 15,
-    height: 100,
-    width: 80
+    height: 120,
+    width: 100
   },
   productName: {
     fontWeight: "bold",
@@ -79,6 +91,10 @@ const styles = StyleSheet.create({
   productBrand: {
     marginTop: 5,
     color: "#ABAAAB"
+  },
+  measure: {
+    alignItems: "flex-end",
+    marginHorizontal: 10
   }
 });
 
