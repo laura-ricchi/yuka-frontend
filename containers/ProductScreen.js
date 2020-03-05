@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
-  Card,
   Image,
   SafeAreaView,
   StyleSheet,
@@ -55,7 +54,9 @@ const ProductScreen = () => {
           source={{ uri: data.product.image_front_url }}
         ></Image>
         <View style={{ flex: 1, marginTop: 15 }}>
-          <Text style={styles.productName}>{data.product.product_name} </Text>
+          <Text numberOfLines={2} style={styles.productName}>
+            {data.product.product_name}{" "}
+          </Text>
           <Text style={styles.productBrand}>{data.product.brands} </Text>
           <View style={{ flexDirection: "row" }}>
             <NutriscoreGradeCard nutriscore={data.product.nutriscore_grade} />
@@ -66,11 +67,20 @@ const ProductScreen = () => {
         </View>
       </View>
       <View>
-        <View style={styles.measure}>
+        <View style={styles.qualities}>
+          <Text style={styles.textQualities}>Qualités</Text>
           <MeasureProduct measure={data.product.nutrition_data_per} />
         </View>
         <View>
           <BioProductCard bioProduct={data.product.labels} />
+          <QualityCard />
+        </View>
+        <View style={styles.defaults}>
+          <Text style={styles.textDefaults}>Défauts</Text>
+          <MeasureProduct measure={data.product.nutrition_data_per} />
+        </View>
+        <View>
+          <DefaultCard />
         </View>
       </View>
     </SafeAreaView>
@@ -80,21 +90,35 @@ const ProductScreen = () => {
 const styles = StyleSheet.create({
   image: {
     margin: 15,
-    height: 120,
+    height: 150,
     width: 100
   },
   productName: {
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 24,
     color: "#272727"
   },
   productBrand: {
     marginTop: 5,
     color: "#ABAAAB"
   },
-  measure: {
-    alignItems: "flex-end",
+  qualities: {
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginHorizontal: 10
+  },
+  defaults: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginHorizontal: 10
+  },
+  textQualities: {
+    fontWeight: "bold",
+    fontSize: 20
+  },
+  textDefaults: {
+    fontWeight: "bold",
+    fontSize: 20
   }
 });
 

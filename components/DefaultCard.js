@@ -1,8 +1,8 @@
 import React from "react";
-import { View } from "react-native";
+import { Text } from "react-native";
 
 const DefaultCard = () => {
-  return <View>DefaultCard</View>;
+  return <Text>Défauts du produit scanné</Text>;
 };
 
 export default DefaultCard;

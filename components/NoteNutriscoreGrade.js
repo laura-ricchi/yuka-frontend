@@ -3,44 +3,42 @@ import { Text, View, StyleSheet } from "react-native";
 
 const NoteNutriscoreGrade = ({ note }) => {
   const noteNutriscore = () => {
-    let tab = [];
     if (note === "a") {
-      tab.push(
+      return (
         <View>
           <Text style={styles.note}>100/100</Text>
           <Text style={styles.textNote}>Excellent</Text>
         </View>
       );
     } else if (note === "b") {
-      tab.push(
+      return (
         <View>
           <Text style={styles.note}>80/100</Text>
           <Text style={styles.textNote}>Très bon</Text>
         </View>
       );
     } else if (note === "c") {
-      tab.push(
+      return (
         <View>
           <Text style={styles.note}>70/100</Text>
           <Text style={styles.textNote}>Bon</Text>
         </View>
       );
     } else if (note === "d") {
-      tab.push(
+      return (
         <View>
           <Text style={styles.note}>40/100</Text>
           <Text style={styles.textNote}>Médiocre</Text>
         </View>
       );
     } else if (note === "e") {
-      tab.push(
+      return (
         <View>
           <Text style={styles.note}>10/100</Text>
           <Text style={styles.textNote}>Mauvais</Text>
         </View>
       );
     }
-    return tab;
   };
   return <View style={styles.note}>{noteNutriscore()}</View>;
 };
