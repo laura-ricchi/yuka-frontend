@@ -56,9 +56,9 @@ export default function App() {
                   }}
                 >
                   <Tab.Screen
-                    name="Historic"
+                    name="History"
                     options={{
-                      tabBarLabel: "Historic",
+                      tabBarLabel: "History",
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
                           name={"carrot"}

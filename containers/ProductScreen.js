@@ -55,7 +55,7 @@ const ProductScreen = () => {
         ></Image>
         <View style={{ flex: 1, marginTop: 15 }}>
           <Text numberOfLines={2} style={styles.productName}>
-            {data.product.product_name}{" "}
+            {data.product.product_name}
           </Text>
           <Text style={styles.productBrand}>{data.product.brands} </Text>
           <View style={{ flexDirection: "row" }}>
@@ -73,7 +73,7 @@ const ProductScreen = () => {
         </View>
         <View>
           <BioProductCard bioProduct={data.product.labels} />
-          <QualityCard />
+          <QualityCard quality={data.product.nutriscore_data} />
         </View>
         <View style={styles.defaults}>
           <Text style={styles.textDefaults}>Défauts</Text>
