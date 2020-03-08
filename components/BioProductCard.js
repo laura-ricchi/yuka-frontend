@@ -1,24 +1,57 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
 const BioProductCard = ({ bioProduct }) => {
-  const bio = () => {
-    if (bioProduct === "bio") {
-      <View style={styles.bioProduct}>
-        <Entypo name="feather" size={20} color="#757575" />
-        <Text>Produit naturel</Text>
-        <AntDesign name="check" size={20} color="#78C689" />
-      </View>;
-    }
-  };
-
-  return <View>{bio()}</View>;
+  return (
+    <View style={styles.allBioProduct}>
+      {bioProduct != "Bio" && (
+        <View style={styles.bioProductNote}>
+          <Entypo
+            style={styles.iconCheck}
+            name="feather"
+            size={20}
+            color="#757575"
+          />
+          <View style={styles.bioProductText}>
+            <Text style={styles.bio}>Bio</Text>
+            <Text style={styles.bioProductNatural}>Produit naturel</Text>
+          </View>
+          <View style={styles.bioProductCheck}>
+            <AntDesign name="check" size={20} color="#78C689" />
+          </View>
+        </View>
+      )}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  bioProduct: {
-    backgroundColor: "yellow"
+  allBioProduct: {
+    marginBottom: 5
+  },
+  bioProductNote: {
+    flexDirection: "row"
+  },
+  bioProductText: {
+    flexDirection: "column"
+  },
+  iconCheck: {
+    marginLeft: 5
+  },
+  bio: {
+    fontWeight: "bold",
+    fontSize: 16
+  },
+  bioProductNatural: {
+    color: "#ABAAAB",
+    fontSize: 16
+  },
+  bioProductCheck: {
+    flex: 1,
+    justifyContent: "flex-end",
+    flexDirection: "row",
+    marginRight: 5
   }
 });
 

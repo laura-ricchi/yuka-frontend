@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ActivityIndicator,
   Image,
-  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View
@@ -42,7 +42,7 @@ const ProductScreen = () => {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View
         style={{
           display: "flex",
@@ -73,17 +73,24 @@ const ProductScreen = () => {
         </View>
         <View>
           <BioProductCard bioProduct={data.product.labels} />
-          <QualityCard quality={data.product.nutriscore_data} />
+          <QualityCard
+            quality={data.product.nutriscore_data}
+            qualityNutriments={data.product.nutriments}
+          />
         </View>
+
         <View style={styles.defaults}>
           <Text style={styles.textDefaults}>Défauts</Text>
           <MeasureProduct measure={data.product.nutrition_data_per} />
         </View>
         <View>
-          <DefaultCard />
+          <DefaultCard
+            defaults={data.product.nutriscore_data}
+            defaultsNutriments={data.product.nutriments}
+          />
         </View>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
@@ -114,11 +121,13 @@ const styles = StyleSheet.create({
   },
   textQualities: {
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 22,
+    marginBottom: 10
   },
   textDefaults: {
     fontWeight: "bold",
-    fontSize: 20
+    fontSize: 22,
+    marginBottom: 10
   }
 });
 

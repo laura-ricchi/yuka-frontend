@@ -9,10 +9,8 @@ const NutriscoreGradeCard = ({ nutriscore }) => {
     } else if (nutriscore === "b") {
       return <Entypo name={"dot-single"} size={60} color="#2ECC71" />;
     } else if (nutriscore === "c") {
-      return <Entypo name={"dot-single"} size={60} color="#FFCD20" />;
-    } else if (nutriscore === "d") {
       return <Entypo name={"dot-single"} size={60} color="#F57D1E" />;
-    } else if (nutriscore === "e") {
+    } else if (nutriscore === "d" || "e") {
       return <Entypo name={"dot-single"} size={60} color="#EF3923" />;
     }
   };
