@@ -8,8 +8,6 @@ import {
 } from "@expo/vector-icons";
 
 const QualityCard = ({ quality, qualityNutriments }) => {
-  console.log(quality);
-
   return (
     <View>
       <View style={styles.allNutriments}>

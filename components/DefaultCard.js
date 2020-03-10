@@ -33,12 +33,9 @@ const DefaultCard = ({ defaults, defaultsNutriments }) => {
               {defaults.sugars >= 18 && defaults.sugars} g
             </Text>
             <Text>
-              {defaults.sugars >= 18 && (
+              {defaults.sugars <= 31 ? (
                 <Entypo name={"dot-single"} size={40} color="#F57D1E" />
-              )}
-            </Text>
-            <Text>
-              {defaults.sugars >= 31 && (
+              ) : (
                 <Entypo name={"dot-single"} size={40} color="#EF3923" />
               )}
             </Text>

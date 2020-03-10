@@ -5,7 +5,7 @@ import { Entypo, AntDesign } from "@expo/vector-icons";
 const BioProductCard = ({ bioProduct }) => {
   return (
     <View style={styles.allBioProduct}>
-      {bioProduct != "Bio" && (
+      {bioProduct === "Agriculture Biologique" && (
         <View style={styles.bioProductNote}>
           <Entypo
             style={styles.iconCheck}

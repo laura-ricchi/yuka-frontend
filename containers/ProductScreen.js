@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import axios from "axios";
 import { useRoute } from "@react-navigation/core";
+import { AsyncStorage } from "react-native";
 import NutriscoreGradeCard from "../components/NutriscoreGradeCard";
 import NoteNutriscoreGrade from "../components/NoteNutriscoreGrade";
 import BioProductCard from "../components/BioProductCard";
@@ -21,7 +22,6 @@ const ProductScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
-  //useEffect avec requete a l'API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,11 +29,27 @@ const ProductScreen = () => {
           `https://world.openfoodfacts.org/api/v0/product/${params.productScanned}.json`
         );
         setData(response.data);
-        console.log(response.data);
 
+        let objToStock = {
+          name: response.data.product.product_name,
+          brand: response.data.product.brands,
+          noteNutriscore: response.data.product.nutriscore_data.grade,
+          image: response.data.product.image_front_url
+        };
+        let recupAsync = await AsyncStorage.getItem("userHistory");
+        if (recupAsync === null) {
+          let tab = [];
+          tab.push(objToStock);
+          await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
+        } else {
+          let stringTab = await AsyncStorage.getItem("userHistory");
+          let tab = JSON.parse(stringTab);
+          tab.push(objToStock);
+          await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
+        }
         setIsLoading(false);
       } catch (err) {
-        console.log("error");
+        console.log(err.message);
       }
     };
     fetchData();
