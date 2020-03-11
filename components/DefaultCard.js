@@ -55,7 +55,7 @@ const DefaultCard = ({ defaults, defaultsNutriments }) => {
           <View style={styles.nutrimentsNote}>
             <Text style={styles.nutriments}> Graisses saturées</Text>
             <Text style={styles.nutrimentsNoteText}>
-              {defaults.saturated_fat >= 4 && defaults.saturated_fat <= 7
+              {defaults.saturated_fat >= 4 && defaults.saturated_fat >= 7
                 ? "Un peu trop gras"
                 : "Trop gras"}
             </Text>

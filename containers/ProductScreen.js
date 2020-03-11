@@ -31,6 +31,7 @@ const ProductScreen = () => {
         setData(response.data);
 
         let objToStock = {
+          code: response.data.product.code,
           name: response.data.product.product_name,
           brand: response.data.product.brands,
           noteNutriscore: response.data.product.nutriscore_data.grade,
