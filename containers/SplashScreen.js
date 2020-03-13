@@ -1,17 +1,21 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { TouchableHighlight } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/core";
 
-export default function SplashScreen() {
+export default function SplashScreen(setToken, setId) {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <Image
         style={styles.photo}
         source={require("../assets/img/photo-carrot-yuka.png")}
       />
-      <Text style={styles.welcome}>Welcome !</Text>
+      <Text style={styles.welcome}>Bienvenue !</Text>
       <Text style={styles.description}>
-        Yuka is a 100% independent app that helps you choose the right products!
+        Yuka est une application 100% indépendante qui vous aide à choisir les
+        bons produits!
       </Text>
       <View
         style={{
@@ -22,9 +26,9 @@ export default function SplashScreen() {
       >
         <TouchableHighlight
           style={styles.button}
-          onPress={() => console.log("!")}
+          onPress={() => navigation.navigate("LogIn")}
         >
-          <Text style={styles.buttonText}>Let's go !</Text>
+          <Text style={styles.buttonText}>C'est parti !</Text>
         </TouchableHighlight>
       </View>
     </View>
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#FF790E",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize: 20
   }
 });

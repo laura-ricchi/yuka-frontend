@@ -22,6 +22,24 @@ export default function App() {
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
+  const setToken = async token => {
+    if (token) {
+      AsyncStorage.setItem("userToken", token);
+    } else {
+      AsyncStorage.removeItem("userToken");
+    }
+    setUserToken(token);
+  };
+
+  const setId = async id => {
+    if (id) {
+      AsyncStorage.setItem("userId", id);
+    } else {
+      AsyncStorage.removeItem("userId");
+    }
+    setUserId(id);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const userHistory = await AsyncStorage.getItem("userHistory");
@@ -34,7 +52,7 @@ export default function App() {
   return (
     <ActionSheetProvider>
       <NavigationContainer>
-        {isLoading ? (
+        {isLoading ? null : userToken === null ? (
           <Stack.Navigator>
             <Stack.Screen
               name="Splash"
@@ -49,13 +67,13 @@ export default function App() {
               name="LogIn"
               options={{ header: () => null, animationEnabled: false }}
             >
-              {() => <LogInScreen />}
+              {() => <LogInScreen setId={setId} setToken={setToken} />}
             </Stack.Screen>
             <Stack.Screen
               name="SignUp"
               options={{ header: () => null, animationEnabled: false }}
             >
-              {() => <SignUpScreen />}
+              {() => <SignUpScreen setId={setId} setToken={setToken} />}
             </Stack.Screen>
           </Stack.Navigator>
         ) : (

@@ -5,23 +5,24 @@ import { Entypo, AntDesign } from "@expo/vector-icons";
 const BioProductCard = ({ bioProduct }) => {
   return (
     <View style={styles.allBioProduct}>
-      {bioProduct === "Agriculture Biologique" && (
-        <View style={styles.bioProductNote}>
-          <Entypo
-            style={styles.iconCheck}
-            name="feather"
-            size={20}
-            color="#757575"
-          />
-          <View style={styles.bioProductText}>
-            <Text style={styles.bio}>Bio</Text>
-            <Text style={styles.bioProductNatural}>Produit naturel</Text>
+      {bioProduct === "Agriculture Biologique" ||
+        ("Bio" && (
+          <View style={styles.bioProductNote}>
+            <Entypo
+              style={styles.iconCheck}
+              name="feather"
+              size={20}
+              color="#757575"
+            />
+            <View style={styles.bioProductText}>
+              <Text style={styles.bio}>Bio</Text>
+              <Text style={styles.bioProductNatural}>Produit naturel</Text>
+            </View>
+            <View style={styles.bioProductCheck}>
+              <AntDesign name="check" size={20} color="#78C689" />
+            </View>
           </View>
-          <View style={styles.bioProductCheck}>
-            <AntDesign name="check" size={20} color="#78C689" />
-          </View>
-        </View>
-      )}
+        ))}
     </View>
   );
 };

@@ -118,16 +118,18 @@ const DefaultCard = ({ defaults, defaultsNutriments }) => {
           <View style={styles.nutrimentsNote}>
             <Text style={styles.nutriments}>Calories</Text>
             <Text style={styles.nutrimentsNoteText}>
-              {defaultsNutriments["energy-kcal_value"] >= 360 &&
-              defaultsNutriments["energy - kcal_value"] <= 560
-                ? "Un peu trop calorique"
-                : "Trop calorique"}
+              {
+                (defaultsNutriments["energy-kcal_value"] =
+                  360 && defaultsNutriments["energy - kcal_value"] <= 560
+                    ? "Un peu trop calorique"
+                    : "Trop calorique")
+              }
             </Text>
           </View>
           <View style={styles.nutrimentsDot}>
             <Text style={styles.valueNutrimentsText}>
               {defaultsNutriments["energy-kcal_value"] >= 360 &&
-                defaultsNutriments["energy-kcal_value"]}
+                defaultsNutriments["energy - kcal_value"] <= 560}
               kCal
             </Text>
             <Text style={styles.nutrimentsNoteText}>

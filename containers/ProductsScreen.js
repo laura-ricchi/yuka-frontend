@@ -58,9 +58,10 @@ const ProductsScreen = () => {
   ) : (
     <FlatList
       data={userHistoryProduct}
-      keyExtractor={item => item.product}
+      keyExtractor={item => item.code}
       renderItem={({ item }) => (
         <View style={styles.allProducts}>
+          {console.log(item)}
           <Image source={{ uri: item.image }} style={styles.image}></Image>
           <View style={styles.noteProduct}>
             <Text numberOfLines={2} style={styles.productName}>
