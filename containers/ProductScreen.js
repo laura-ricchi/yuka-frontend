@@ -40,12 +40,17 @@ const ProductScreen = () => {
         let recupAsync = await AsyncStorage.getItem("userHistory");
         if (recupAsync === null) {
           let tab = [];
-          tab.push(objToStock);
+          tab.unshift(objToStock);
           await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
         } else {
           let stringTab = await AsyncStorage.getItem("userHistory");
           let tab = JSON.parse(stringTab);
-          tab.push(objToStock);
+          for (let i = 0; i < tab.length; i++) {
+            if (tab[i].code === response.data.product.code) {
+              tab.splice(i, 1);
+            }
+          }
+          tab.unshift(objToStock);
           await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
         }
         setIsLoading(false);

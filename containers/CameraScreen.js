@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import { Button, Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { useNavigation } from "@react-navigation/core";
+// import Torch from "react-native-torch";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
+  // const [lampTorch, setLampTorch] = false;
+  // const [turnOnTorch, setTurnOnTorch] = useState(true);
+  // const [turnOffTorch, setTurnOffTorch] = useState(false);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -38,6 +42,20 @@ export default function CameraScreen() {
         justifyContent: "flex-end"
       }}
     >
+      {/* <TouchableOpacity
+        style={{
+          width: 20,
+          height: 20,
+          backgroundColor: "#FF6F00",
+          borderRadius: 7,
+
+        }}
+        onPress={() => {
+          setTurnOnTorch(false);
+          setTurnOffTorch(true);
+        }}
+      ></TouchableOpacity> */}
+
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}

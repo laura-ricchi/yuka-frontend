@@ -5,8 +5,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import CameraScreen from "./containers/CameraScreen";
 import FavoritesScreen from "./containers/FavoritesScreen";
+import LogInScreen from "./containers/LogInScreen";
 import ProductScreen from "./containers/ProductScreen";
 import ProductsScreen from "./containers/ProductsScreen";
+import SignUpScreen from "./containers/SignUpScreen";
 import SplashScreen from "./containers/SplashScreen";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AsyncStorage } from "react-native";
@@ -17,6 +19,8 @@ const Stack = createStackNavigator();
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userHistory, setUserHistory] = useState(null);
+  const [userToken, setUserToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,6 +44,18 @@ export default function App() {
               }}
             >
               {() => <SplashScreen />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="LogIn"
+              options={{ header: () => null, animationEnabled: false }}
+            >
+              {() => <LogInScreen />}
+            </Stack.Screen>
+            <Stack.Screen
+              name="SignUp"
+              options={{ header: () => null, animationEnabled: false }}
+            >
+              {() => <SignUpScreen />}
             </Stack.Screen>
           </Stack.Navigator>
         ) : (
