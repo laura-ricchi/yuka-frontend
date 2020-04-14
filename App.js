@@ -10,33 +10,47 @@ import ProductScreen from "./containers/ProductScreen";
 import ProductsScreen from "./containers/ProductsScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SplashScreen from "./containers/SplashScreen";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { AsyncStorage, Button } from "react-native";
+import {
+  AntDesign,
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+import { AsyncStorage } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
+  // création de plusieurs états
   const [isLoading, setIsLoading] = useState(true);
   const [userHistory, setUserHistory] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
+  // création d'une const setToken
   const setToken = async (token) => {
+    // s'il existe un token
     if (token) {
+      // alors on enregistre dans la mémoire du téléphone le token lié à l'userToken
       AsyncStorage.setItem("userToken", token);
     } else {
+      // sinon on supprime l'userToken
       AsyncStorage.removeItem("userToken");
     }
+    // mise à jour de l'état de userToken avec la nouvelle valeur de token
     setUserToken(token);
   };
-
+  // création d'une const ID
   const setId = async (id) => {
+    // s'il existe un id
     if (id) {
+      // alors on enregistre dans la mémoire du téléphone le l'id lié à l'userId
       AsyncStorage.setItem("userId", id);
     } else {
+      // sinon on supprime l'userId
       AsyncStorage.removeItem("userId");
     }
+    // mise à jour de l'état "setUserId" avec la nouvelle valeur id
     setUserId(id);
   };
 
@@ -107,17 +121,25 @@ export default function App() {
                         <Stack.Screen
                           name="Products"
                           options={{
-                            title: "Produits",
+                            headerTitle: "Produits",
                             headerStyle: { backgroundColor: "#FFFFFF" },
-                            headerTitleStyle: { color: "#000000" },
-                            headerTitleAlign: "center",
-                            headerRight: ({ color }) => {
-                              <Button
-                                onPress={() => alert("This is a button!")}
-                                title="Deconnexion"
-                                color={"#000000"}
-                              />;
+                            headerTitleStyle: {
+                              color: "#000000",
+                              fontWeight: "bold",
                             },
+                            headerTitleAlign: "center",
+                            headerRight: () => (
+                              <FontAwesome
+                                name="sign-out"
+                                color="#52B03B"
+                                size={30}
+                                onPress={() => {
+                                  setToken(null),
+                                    AsyncStorage.removeItem("userToken"),
+                                    AsyncStorage.removeItem("userId");
+                                }}
+                              />
+                            ),
                           }}
                         >
                           {() => <ProductsScreen />}
@@ -125,9 +147,12 @@ export default function App() {
                         <Stack.Screen
                           name="Product"
                           options={{
-                            title: "Produit",
+                            headerTitle: "Produit",
                             headerStyle: { backgroundColor: "#FFFFFF" },
-                            headerTitleStyle: { color: "#000000" },
+                            headerTitleStyle: {
+                              color: "#000000",
+                              fontWeight: "bold",
+                            },
                           }}
                         >
                           {() => <ProductScreen />}
@@ -177,9 +202,12 @@ export default function App() {
                         <Stack.Screen
                           name="Favorites"
                           options={{
-                            title: "Favorites",
+                            title: "Favoris",
                             headerStyle: { backgroundColor: "#FFFFFF" },
-                            headerTitleStyle: { color: "#000000" },
+                            headerTitleStyle: {
+                              color: "#000000",
+                              fontWeight: "bold",
+                            },
                             headerTitleAlign: "center",
                           }}
                         >
