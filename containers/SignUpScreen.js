@@ -3,14 +3,14 @@ import { useNavigation } from "@react-navigation/core";
 import {
   Image,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import axios from "axios";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function SignUpScreen({ setToken, setId }) {
   const navigation = useNavigation();
@@ -40,84 +40,94 @@ function SignUpScreen({ setToken, setId }) {
     }
   };
   return (
-    <SafeAreaView style={{ flex: 1, alignItems: "center" }}>
-      <Image
-        source={require("../assets/img/yuka-logo.png")}
-        style={styles.logo}
-      />
-      <View style={styles.form}>
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Votre Email"
-          placeholderTextColor="#302C2E"
-          onChangeText={text => setEmail(text)}
+    <KeyboardAwareScrollView
+      extraScrollHeight={110}
+      contentContainerStyle={styles.container}
+    >
+      <SafeAreaView>
+        <Image
+          source={require("../assets/img/yuka-logo.png")}
+          style={styles.logo}
         />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Votre nom d'utilisateur"
-          placeholderTextColor="#302C2E"
-          onChangeText={text => setUsername(text)}
-        />
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Votre nom"
-          placeholderTextColor="#302C2E"
-          onChangeText={text => setName(text)}
-        />
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Votre mot de passe"
-          placeholderTextColor="#302C2E"
-          secureTextEntry={true}
-          onChangeText={text => setPassword(text)}
-        />
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Confirmez votre mot de passe"
-          placeholderTextColor="#302C2E"
-          secureTextEntry={true}
-          onChangeText={text => setConfirmPassword(text)}
-        />
+        <View style={styles.form}>
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Votre Email"
+            placeholderTextColor="#302C2E"
+            onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Votre nom d'utilisateur"
+            placeholderTextColor="#302C2E"
+            onChangeText={(text) => setUsername(text)}
+          />
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Votre nom"
+            placeholderTextColor="#302C2E"
+            onChangeText={(text) => setName(text)}
+          />
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Votre mot de passe"
+            placeholderTextColor="#302C2E"
+            secureTextEntry={true}
+            onChangeText={(text) => setPassword(text)}
+          />
+          <TextInput
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Confirmez votre mot de passe"
+            placeholderTextColor="#302C2E"
+            secureTextEntry={true}
+            onChangeText={(text) => setConfirmPassword(text)}
+          />
 
-        <TouchableOpacity
-          onPress={handleSubmit}
-          style={styles.buttonInscription}
-        >
-          <Text style={styles.buttonText}>S'inscrire</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleSubmit}
+            style={styles.buttonInscription}
+          >
+            <Text style={styles.buttonText}>S'inscrire</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("LogIn");
-          }}
-        >
-          <Text style={styles.buttonConnect}>
-            Déjà un compte ? Se connecter !
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("LogIn");
+            }}
+          >
+            <Text style={styles.buttonConnect}>
+              Déjà un compte ? Se connecter !
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </KeyboardAwareScrollView>
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   logo: {
-    marginTop: 15
+    marginTop: 15,
   },
   form: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 20
   },
   textInput: {
     borderBottomColor: "#168750",
     borderBottomWidth: 1,
     width: 210,
     height: 45,
-    marginBottom: 10
+    marginBottom: 20,
   },
   buttonInscription: {
     height: 44,
@@ -125,19 +135,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#F59A30",
     borderRadius: 15,
-    marginTop: 15
+    marginTop: 15,
   },
   buttonText: {
     color: "#FFFFFF",
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
   },
   buttonConnect: {
     marginTop: 15,
     fontWeight: "bold",
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });
 
 export default SignUpScreen;

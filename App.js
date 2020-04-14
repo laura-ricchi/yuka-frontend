@@ -11,7 +11,7 @@ import ProductsScreen from "./containers/ProductsScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SplashScreen from "./containers/SplashScreen";
 import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Button } from "react-native";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -22,7 +22,7 @@ export default function App() {
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
-  const setToken = async token => {
+  const setToken = async (token) => {
     if (token) {
       AsyncStorage.setItem("userToken", token);
     } else {
@@ -31,7 +31,7 @@ export default function App() {
     setUserToken(token);
   };
 
-  const setId = async id => {
+  const setId = async (id) => {
     if (id) {
       AsyncStorage.setItem("userId", id);
     } else {
@@ -58,7 +58,7 @@ export default function App() {
               name="Splash"
               options={{
                 title: "Home",
-                header: () => null
+                header: () => null,
               }}
             >
               {() => <SplashScreen />}
@@ -85,21 +85,21 @@ export default function App() {
                     activeTintColor: "green",
                     inactiveTintColor: "black",
                     style: {
-                      backgroundColor: "#F9F9F9"
-                    }
+                      backgroundColor: "#F9F9F9",
+                    },
                   }}
                 >
                   <Tab.Screen
                     name="History"
                     options={{
-                      tabBarLabel: "History",
+                      tabBarLabel: "Historique",
                       tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
                           name={"carrot"}
                           size={30}
                           color={"#000000"}
                         />
-                      )
+                      ),
                     }}
                   >
                     {() => (
@@ -107,10 +107,17 @@ export default function App() {
                         <Stack.Screen
                           name="Products"
                           options={{
-                            title: "Products",
+                            title: "Produits",
                             headerStyle: { backgroundColor: "#FFFFFF" },
                             headerTitleStyle: { color: "#000000" },
-                            headerTitleAlign: "center"
+                            headerTitleAlign: "center",
+                            headerRight: ({ color }) => {
+                              <Button
+                                onPress={() => alert("This is a button!")}
+                                title="Deconnexion"
+                                color={"#000000"}
+                              />;
+                            },
                           }}
                         >
                           {() => <ProductsScreen />}
@@ -118,9 +125,9 @@ export default function App() {
                         <Stack.Screen
                           name="Product"
                           options={{
-                            title: "Product",
+                            title: "Produit",
                             headerStyle: { backgroundColor: "#FFFFFF" },
-                            headerTitleStyle: { color: "#000000" }
+                            headerTitleStyle: { color: "#000000" },
                           }}
                         >
                           {() => <ProductScreen />}
@@ -138,7 +145,7 @@ export default function App() {
                           size={30}
                           color={"#000000"}
                         />
-                      )
+                      ),
                     }}
                   >
                     {() => (
@@ -148,7 +155,7 @@ export default function App() {
                           options={{
                             title: "Scan",
                             headerTitleAlign: "center",
-                            headerStyle: { backgroundColor: "#FFFFFF" }
+                            headerStyle: { backgroundColor: "#FFFFFF" },
                           }}
                         >
                           {() => <CameraScreen />}
@@ -159,10 +166,10 @@ export default function App() {
                   <Tab.Screen
                     name="Favorites"
                     options={{
-                      tabBarLabel: "Favorites",
+                      tabBarLabel: "Favoris",
                       tabBarIcon: ({ color, size }) => (
                         <AntDesign name={"heart"} size={25} color={"#000000"} />
-                      )
+                      ),
                     }}
                   >
                     {() => (
@@ -173,7 +180,7 @@ export default function App() {
                             title: "Favorites",
                             headerStyle: { backgroundColor: "#FFFFFF" },
                             headerTitleStyle: { color: "#000000" },
-                            headerTitleAlign: "center"
+                            headerTitleAlign: "center",
                           }}
                         >
                           {() => <FavoritesScreen />}
