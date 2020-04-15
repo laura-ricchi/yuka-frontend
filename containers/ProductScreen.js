@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
 } from "react-native";
 import axios from "axios";
 import { useRoute } from "@react-navigation/core";
@@ -17,33 +17,50 @@ import QualityCard from "../components/QualityCard";
 import DefaultCard from "../components/DefaultCard";
 import MeasureProduct from "../components/MeasureProduct";
 
+// Ecran -> affichage fiche produit après scan du code barre
+// création d'une fonction
 const ProductScreen = () => {
+  // transmission de params
   const { params } = useRoute();
+  // création d'états
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({});
 
+  // utilisation d'useEffect - seulement au premier téléchargement du composant
   useEffect(() => {
+    // fonction de recherche de données depuis l'API
     const fetchData = async () => {
       try {
+        // lancement de récupération des données depuis l'API et le produit scanné avec une requête axios en get
         const response = await axios.get(
           `https://world.openfoodfacts.org/api/v0/product/${params.productScanned}.json`
         );
+        // mise à jour de l'état "setData" avec la réponse
         setData(response.data);
 
+        // création d'un objet et stockage des infos récupérées de l'API
         let objToStock = {
           code: response.data.product.code,
           name: response.data.product.product_name,
           brand: response.data.product.brands,
           noteNutriscore: response.data.product.nutriscore_data.grade,
-          image: response.data.product.image_front_url
+          image: response.data.product.image_front_url,
         };
+
+        // création d'une variable pour récupérer une chaîne de caractères enregistrée
         let recupAsync = await AsyncStorage.getItem("userHistory");
+        // si nous n'avons pas récupérer cette chaîne de caractères
         if (recupAsync === null) {
+          // alors création d'un tableau
           let tab = [];
+          // ajout des éléments de l'objet "objToStock" au début du tableau "tab"
           tab.unshift(objToStock);
+          // enregistre dans la mémoire du téléphone la variable "tab" qui n'est pas une chaîne de caractères
           await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
         } else {
+          // sinon création d'une variable et récupération d'une chaîne de caractères
           let stringTab = await AsyncStorage.getItem("userHistory");
+          //
           let tab = JSON.parse(stringTab);
           for (let i = 0; i < tab.length; i++) {
             if (tab[i].code === response.data.product.code) {
@@ -68,7 +85,7 @@ const ProductScreen = () => {
       <View
         style={{
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
         }}
       >
         <Image
@@ -120,37 +137,37 @@ const styles = StyleSheet.create({
   image: {
     margin: 15,
     height: 150,
-    width: 100
+    width: 100,
   },
   productName: {
     fontWeight: "bold",
     fontSize: 24,
-    color: "#272727"
+    color: "#272727",
   },
   productBrand: {
     marginTop: 5,
-    color: "#ABAAAB"
+    color: "#ABAAAB",
   },
   qualities: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   defaults: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   textQualities: {
     fontWeight: "bold",
     fontSize: 22,
-    marginBottom: 10
+    marginBottom: 10,
   },
   textDefaults: {
     fontWeight: "bold",
     fontSize: 22,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 export default ProductScreen;

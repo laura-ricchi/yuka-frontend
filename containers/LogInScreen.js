@@ -12,26 +12,40 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/core";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// Ecran -> se connecter
+// création d'une fonction et transmission de props
 function LogInScreen({ setToken, setId }) {
+  // création d'états pour le formulaire de connexion au compte
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
+  // fonction de recherche de données de formulaire depuis la route Login dans le backend
   const handleSubmitConnect = async () => {
     try {
+      // si l'utilisateur ne saisit pas d'email
       if (email === "") {
+        // alors afficher une alerte
         alert("Merci de saisir votre email ");
+        // si l'utilisateur ne saisit pas de mot de passe
       } else if (password === "") {
+        // alors afficher une alerte
         alert("Merci de saisir votre mot de passe");
       }
+      // lancement de la récupération de données depuis le backend avec une requête axios en post
       const response = await axios.post(
         "https://my-project-yuka.herokuapp.com/user/log-in",
+        // transmission de 2 paramètres dans le body
         { email, password }
       );
+      // si on récupère le token dans la réponse axios
       if (response.data.token) {
+        // alors on met à jour l'état "setToken" avec la réponse
         setToken(response.data.token);
+        // et on met à jour l'état "id" avec la réponse
         setId(response.data.id);
       }
+      // s'il y a une erreur alors afficher un message
     } catch (error) {
       alert(error.message);
     }
