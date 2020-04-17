@@ -16,16 +16,19 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { AsyncStorage } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function App() {
+  const navigation = useNavigation();
   // création de plusieurs états
   const [isLoading, setIsLoading] = useState(true);
   const [userHistory, setUserHistory] = useState(null);
   const [userToken, setUserToken] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [favorites, setFavorites] = useState(null);
 
   // création d'une const setToken
   const setToken = async (token) => {
@@ -131,8 +134,8 @@ export default function App() {
                             headerRight: () => (
                               <FontAwesome
                                 name="sign-out"
-                                color="#52B03B"
-                                size={30}
+                                color="#000"
+                                size={35}
                                 onPress={() => {
                                   setToken(null),
                                     AsyncStorage.removeItem("userToken"),
@@ -153,6 +156,17 @@ export default function App() {
                               color: "#000000",
                               fontWeight: "bold",
                             },
+                            headerTitleAlign: "center",
+                            headerRight: () => (
+                              <FontAwesome
+                                name="heart"
+                                color="#DF3A00"
+                                size={30}
+                                // onPress={() => {
+                                //   navigation.navigate("Favorites");
+                                // }}
+                              />
+                            ),
                           }}
                         >
                           {() => <ProductScreen />}

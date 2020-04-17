@@ -44,7 +44,6 @@ function SignUpScreen({ setToken, setId }) {
         // alors on met à jour l'état "setToken" avec la réponse
         setToken(response.data.token);
         // et on met à jour l'état "id" avec la réponse
-
         setId(response.data.id);
       }
       // s'il y a une erreur alors afficher un message

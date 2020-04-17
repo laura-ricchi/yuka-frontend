@@ -37,7 +37,6 @@ const ProductScreen = () => {
         );
         // mise à jour de l'état "setData" avec la réponse
         setData(response.data);
-
         // création d'un objet et stockage des infos récupérées de l'API
         let objToStock = {
           code: response.data.product.code,
@@ -47,34 +46,39 @@ const ProductScreen = () => {
           image: response.data.product.image_front_url,
         };
 
-        // création d'une variable pour récupérer une chaîne de caractères enregistrée
+        // création d'une variable pour récupérer une chaîne de caractères enregistrée dans la mémoire du téléphone
         let recupAsync = await AsyncStorage.getItem("userHistory");
-        // si nous n'avons pas récupérer cette chaîne de caractères
+        // si ce n'est pas une chaîne de caractères
         if (recupAsync === null) {
           // alors création d'un tableau
           let tab = [];
           // ajout des éléments de l'objet "objToStock" au début du tableau "tab"
           tab.unshift(objToStock);
-          // enregistre dans la mémoire du téléphone la variable "tab" qui n'est pas une chaîne de caractères
+          // enregistre dans la mémoire du téléphone "userHistory" et conversion du tableau en chaine de caractères
           await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
         } else {
-          // sinon création d'une variable et récupération d'une chaîne de caractères
+          // sinon création d'une variable "stringTab" et récupération d'une chaîne de caractères enregistrée dans "userHistory"
           let stringTab = await AsyncStorage.getItem("userHistory");
-          //
+          // création d'une variable "tab" et conversion du tableau de chaine de caractères en objet JS
           let tab = JSON.parse(stringTab);
+          // ajout d'une boucle pour éviter les doublons dans l'affichage des produits scannés
           for (let i = 0; i < tab.length; i++) {
             if (tab[i].code === response.data.product.code) {
               tab.splice(i, 1);
             }
           }
+          // ajout des éléments "objToStock" dans le tableau
           tab.unshift(objToStock);
+          // enregistre dans la mémoire du téléphone "userHistory" et conversion du tableau en chaine de caractères
           await AsyncStorage.setItem("userHistory", JSON.stringify(tab));
         }
+        // informer que les données ont bien chargées - l'état est mis à jour (false)
         setIsLoading(false);
       } catch (err) {
         console.log(err.message);
       }
     };
+    // récupération des données via le scan du code barre
     fetchData();
   }, [params.productScanned]);
 
